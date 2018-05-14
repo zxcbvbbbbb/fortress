@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+
+<textarea id="cmd_input" placeholder="input your cmd here..."></textarea>
+<input type="button" class="button btn-success" onclick="PostTest()" value="test">
+<script>
+obj = ['3','2','1']
+
+
+
+function PostTest() {
+    var cmd = $('#cmd_input').val()
+    alert(cmd)
+    console.log(cmd)
+}
+
+
+</script>
+
+</body>
+</html>

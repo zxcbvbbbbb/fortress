@@ -1,0 +1,60 @@
+ 
+ 
+    <div class="col-lg-3">
+        <div class="panel-group accordion">
+            <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a aria-expanded="true">主机列表</a></h3>
+            </div>
+            <div class="panel-body">
+                <div class="list-group bord-no" >
+                    <!--<div class="btn btn-group-xs">-->
+                    <input type="button" id="test" class="btn btn-xs btn-success btn-hover-warning" onclick="hostGroupToggle(this)" value="收缩/展开">
+                    <input type="button" class="btn btn-xs btn-success btn-hover-warning" onclick="chooseAll()" value="全选">
+                    <input type="button" class="btn btn-xs btn-success btn-hover-warning" onclick="cancel()" value="取消">
+                    <input type="button" class="btn btn-xs btn-success btn-hover-warning" onclick="reverse()" value="反选">
+                    <!--</div>-->
+                </div>
+
+                <div class="list-group bord-no" >
+                    {% for host_group in request.user.host_groups.all %}
+                    <a class="list-group-item" href="#" onclick="ItemToggle(this)">
+                        {{ host_group.name }}<span class="badge badge-primary">{{ host_group.host_to_remote_users.count }}</span>
+                    </a>
+                    <div class="pad-lft">
+                        <ul class="list-group mar-no">
+                        {% for host_to_user_obj in host_group.host_to_remote_users.all %}
+
+                             <li class="list-group-item">
+                                 <input type="checkbox" value="{{ host_to_user_obj.id }}">
+                                 {{ host_to_user_obj.host.name }} | {{ host_to_user_obj.remote_users.username }}@{{ host_to_user_obj.remote_users.password }}
+                             </li>
+
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+
+                    <a class="list-group-item" href="#" onclick="ItemToggle(this)">未分组主机
+                        <span class="badge badge-primary">{{ request.user.host_to_remote_users.count }}
+                        </span>
+                    </a>
+                    <div class="pad-lft">
+                        <ul class="list-group">
+                           {% for host_to_user_obj in request.user.host_to_remote_users.all %}
+                               <li class="list-group-item">
+                                    <input type="checkbox" value="{{ host_to_user_obj.id }}">
+                                   {{ host_to_user_obj.host.name }} | {{ host_to_user_obj.remote_users.username }}@{{ host_to_user_obj.remote_users.password }}
+                               </li>
+                           {% endfor %}
+                        </ul>
+                    </div>
+
+
+		</div>
+            </div>
+    </div>
+
+
+</div>
+    </div>
